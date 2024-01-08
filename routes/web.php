@@ -18,6 +18,3 @@ Route::get('/', [HomeController::class,'show']);
 Route::get('/meow', [MeowController::class,'show']);
 Route::get('/meow/{id}', [MeowController::class,'showId']);
 
-Route::get('/meow/{id}', function (int $id) {
-    return "Message {$id}";
-});

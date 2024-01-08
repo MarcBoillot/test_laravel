@@ -8,9 +8,9 @@ class MeowController extends Controller
 {
     public function show(){
 
-        return 'liste des messages meowController';
+        return view('meows-list');
     }
     public function showId(int $id){
-        return $id;
+        return view('meow-details',['id'=> $id]);
     }
 }
