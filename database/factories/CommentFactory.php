@@ -18,7 +18,7 @@ class CommentFactory extends Factory
     public function definition(): array
     {
         return [
-            'text' => fake()->realText($maxNbChars = 300),
+            'message' => fake()->realText($maxNbChars = 300),
             
             ];
     }

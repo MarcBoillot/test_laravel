@@ -19,8 +19,8 @@ class UserSeeder extends Seeder
         User::factory()
             ->count(50)
             ->has(Post::factory(3)
-            ->hasComments(3)
-            ->create());
+            ->hasComments(3))
+            ->create();
         /*DB::table('users')->insert([
             'name' => Str::random(10),
             'email' => Str::random(10).'@example.com',
