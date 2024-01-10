@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Comment;
-use App\Models\Post;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
@@ -18,8 +18,8 @@ class CommentFactory extends Factory
     public function definition(): array
     {
         return [
-            'text' => fake()->message(),
-            $comment = Comment::factory()->hasComments(3)->create()
+            'text' => fake()->realText($maxNbChars = 300),
+            
             ];
     }
 }

@@ -12,9 +12,8 @@ class Comment extends Model
     protected $fillable = [
         'text',
     ];
+    function messages(): BelongsTo{
+        return $this->belongsTo(Post::class);
+    }
 }
-    function create(){
-      
-        $this->BelongsTo(User::class);
-    
-}
+

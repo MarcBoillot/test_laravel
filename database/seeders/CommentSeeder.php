@@ -14,7 +14,6 @@ class CommentSeeder extends Seeder
     {
         Comment::factory()
             ->count(50)
-            ->hasComments(1)
             ->create();
     }
 }
