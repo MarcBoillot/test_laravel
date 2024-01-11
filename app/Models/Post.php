@@ -17,7 +17,7 @@ class Post extends Model
     ];
     //faire une fonction pour faire les liens entre les tables
     function users(): BelongsTo {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
     public function comments(): HasMany {
         return $this->hasMany(Comment::class);

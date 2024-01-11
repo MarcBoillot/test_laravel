@@ -15,15 +15,16 @@ use App\Http\Controllers\PostController;
 |
 */
 
-/**Route::get('/', function () {
+Route::get('/', function () {
     return view('welcome');
-});*/
-Route::get('/', [HomeController::class,'show']);
-Route::get('/post', [PostController::class,'show']);
-Route::get('/post/{id}', [PostController::class,'showId']);
+});
+//Route::get('/', [HomeController::class,'show']);
+Route::get('/post/{post}', [PostController::class,'show']);
+//Route::get('/post/{id}', [PostController::class,'showId']);
+Route::get('/posts', [PostController::class,'index']);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+   return redirect('/posts');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
