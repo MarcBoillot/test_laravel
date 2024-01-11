@@ -7,6 +7,8 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Support\Facades\Gate;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Auth\Access\Response;
+
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -24,7 +26,9 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::define('read-post', function (User $user, Post $post) {
-            return $user->id === $post->user_id;
+            return $user->id === $post->user_id ? 
+            Response ::allow() :
+            Response ::deny('connection refusé ');
         });
         Gate::define('update-post', function (User $user, Post $post) {
             return $user->id === $post->user_id;

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('message',300);
-            $table->foreignUuid('post_id')->constrained();
+            $table->foreignUuid('post_id')->constrained()->onDelete('cascade');
         });
     }
 

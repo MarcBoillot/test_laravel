@@ -14,7 +14,7 @@ use App\Http\Controllers\PostController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::resource('posts', PostController::class);
 Route::get('/', function () {
     return view('welcome');
 });

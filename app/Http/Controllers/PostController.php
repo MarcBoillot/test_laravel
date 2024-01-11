@@ -13,10 +13,13 @@ class PostController extends Controller
         return view('posts-list',['posts'=> Post::all()]);
     }
 
-    public function showId(int $id){
+    /*public function showId(int $id){
         return view('post-details',['id'=> $id]);
+    }*/
+    public function destroy(Post $post){
+        $post->delete();
+        return redirect(route('post.index'));
     }
-
     public function show( Post $post )
     {
         if (! Gate::allows('read-post', $post)) {
