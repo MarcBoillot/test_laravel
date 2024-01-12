@@ -20,6 +20,30 @@ class PostController extends Controller
         $post->delete();
         return redirect(route('post.index'));
     }
+
+    public function create(Post $post){
+        $post->edit();
+      return view('posts-list');
+    }
+
+
+    public function store(Request $request) {
+        // 1. La validation
+        $this->validate($request, [
+            'message' => 'bail|required|string|max:255'
+            
+        ]);
+    
+        // 3. On enregistre les informations du Post
+        Post::create([
+            "message" => $request->message,
+            "user_id"=>$request->user()->id
+        ]);
+    
+        // 4. On retourne vers tous les posts : route("posts.index")
+        return redirect(route("post.index"));
+    }
+
     public function show( Post $post )
     {
         if (! Gate::allows('read-post', $post)) {
@@ -31,7 +55,7 @@ class PostController extends Controller
         return view('post-details',['post'=>$post]);
     }
 
-    public function create(Post $post): RedirectResponse
+   /**public function create(Post $post): RedirectResponse
     {
         if (! Gate::allows('create-post', $post)) {
             abort(403);
@@ -40,7 +64,7 @@ class PostController extends Controller
         // Update the post...
  
         return redirect('/posts');
-    }
+    } */ 
 
     public function update(Request $request, Post $post): RedirectResponse
     {

@@ -12,11 +12,13 @@ class Post extends Model
 {
     use HasFactory;
     use HasUuids;
+
     protected $fillable = [
         'message',
+        'user_id'
     ];
     //faire une fonction pour faire les liens entre les tables
-    function users(): BelongsTo {
+    function user(): BelongsTo {
         return $this->belongsTo(User::class, 'user_id');
     }
     public function comments(): HasMany {
