@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\View;
+
 class PostController extends Controller
 {
     public function index(){
@@ -41,14 +43,13 @@ class PostController extends Controller
         return redirect(route("post.index"));
     }
 
-    public function show( Post $post )
+    public function show( Post $post ):View
     {
         if (! Gate::allows('read-post', $post)) {
             abort(403);
         }
         
-        // read the post...
- 
+         
         return view('post-details',['post'=>$post]);
     }
 

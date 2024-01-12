@@ -1,7 +1,7 @@
 <div>
     <h1>la liste des messages de la posts-list</h1>
-    
-
+		
+	
 	<!-- Le formulaire est géré par la route "posts.store" -->
 	<form method="POST" action="{{ route('post.store') }}" enctype="multipart/form-data" >
 
