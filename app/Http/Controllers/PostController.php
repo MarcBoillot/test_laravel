@@ -9,8 +9,7 @@ use Illuminate\Support\Facades\Gate;
 class PostController extends Controller
 {
     public function index(){
-        
-        return view('posts-list',['posts'=> Post::all()]);
+        return view('posts-list',['posts'=> Post::latest()->get()]);
     }
 
     /*public function showId(int $id){
@@ -22,6 +21,7 @@ class PostController extends Controller
     }
 
     public function create(Post $post){
+        $this->authorize('create', Post::class);
         $post->edit();
       return view('posts-list');
     }
@@ -30,16 +30,13 @@ class PostController extends Controller
     public function store(Request $request) {
         // 1. La validation
         $this->validate($request, [
-            'message' => 'bail|required|string|max:255'
-            
+            'message' => 'bail|required|string|max:255'         
         ]);
-    
         // 3. On enregistre les informations du Post
         Post::create([
             "message" => $request->message,
             "user_id"=>$request->user()->id
-        ]);
-    
+        ]);  
         // 4. On retourne vers tous les posts : route("posts.index")
         return redirect(route("post.index"));
     }
@@ -55,18 +52,7 @@ class PostController extends Controller
         return view('post-details',['post'=>$post]);
     }
 
-   /**public function create(Post $post): RedirectResponse
-    {
-        if (! Gate::allows('create-post', $post)) {
-            abort(403);
-        }
-        
-        // Update the post...
- 
-        return redirect('/posts');
-    } */ 
-
-    public function update(Request $request, Post $post): RedirectResponse
+    public function edit(Request $request, Post $post)
     {
         if (! Gate::allows('update-post', $post)) {
             abort(403);
@@ -74,14 +60,11 @@ class PostController extends Controller
         
         // Update the post...
  
-        return redirect('/posts');
+        return view("post-details", ['post'=>$post]);
     }
 
-    public function delete(Request $request ,Post $post): RedirectResponse
-    {
-        if (! Gate::allows('delete-post', $post)){
-            abort(403);
-        }
-        return redirect('/posts');
+    public function update(Request $request,Post $post){
+        $post->update(['message'=>$request->message]);
+        return view('post-details',['post'=>$post]);
     }
 }
